@@ -61,48 +61,25 @@
 
         .custom-table1 td {
             {#font-size: 15.1px;#}
-            font-size: 1vw;
+            font-size: 0.99vw;
         }
         .custom-table1 th {
             {#font-size: 16px;#}
             font-size: 0.9vw;
 
         }
-        {# @media (min-width: 1602px) {#}
-        {#    .custom-table1 th,#}
-        {#    .custom-table1 td {#}
-        {#        font-size: 19.2px;#}
-        {#    }#}
-
-
-
-        {#@media (min-width: 1602px) and (min-resolution: 96dpi) and (min-width: 2560px),#}
-        {#(min-width: 1602px) and (min-resolution: 192dpi) and (min-width: 5120px) {#}
-        {#    .custom-table1 th,#}
-        {#    .custom-table1 td {#}
-        {#        font-size: 19.5px;#}
-        {#    }#}
-
-
         .custom-table1 tr:nth-child(even) th,
         .custom-table1 tr:nth-child(even) td {
             border: 1px solid #D9F2FF ;
         }
-
         .custom-table1 tr:nth-child(odd) th,
         .custom-table1 tr:nth-child(odd) td {
             border: 1px solid #6BABE5 ;
         }
-
-
         .custom-table1 tr:first-child th,
         .custom-table1 tr:first-child td {
             border: 1px solid #2a2e72;
         }
-
-
-
-
 
         .custom-table1 table tr:first-child {
             background-color: #2a2e72;
@@ -124,27 +101,19 @@
         </table>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="{% static 'js/jquery3.1.1.js' %}"></script>
+{#<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>#}
 </body>
 <script>
-
-    setTimeout(function () {
-        location.reload();
-    }, 1000 * 60 * 30);
-</script>
-<script>
   document.addEventListener("DOMContentLoaded", function () {
-    var rows = document.querySelectorAll(".custom-table1 table tr");
-
+    const rows = document.querySelectorAll(".custom-table1 table tr");
     rows.forEach(function (row) {
-        var cells = row.querySelectorAll("td");
-
+        const cells = row.querySelectorAll("td");
         cells.forEach(function (cell, index) {
             // Пропускане на първите две клетки в реда
             if (index < 1) {
                 return;
             }
-
             // Ако текстът на клетката е празен, задайте цвета
             if (cell.innerText.trim() === "") {
                 cell.style.backgroundColor = "#EB002B";
@@ -155,8 +124,8 @@
 
 $(document).ready(function () {
     $(".custom-table1 table td").each(function () {
-        var cellText = $(this).text().trim();
-        var weekdays = ["понеделник", "вторник", "сряда", "четвъртък", "петък", 'събота', 'неделя', 'смяна', 'линия'];
+        let cellText = $(this).text().trim();
+        let weekdays = ["понеделник", "вторник", "сряда", "четвъртък", "петък", 'събота', 'неделя', 'смяна', 'линия'];
 
         // Проверка дали текущият текст е в списъка с дни
         if (weekdays.includes(cellText.toLowerCase())) {
@@ -167,11 +136,11 @@ $(document).ready(function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    var rows = document.querySelectorAll(".custom-table1 table tr");
-    var currentColor = null; // Променлива за текущия цвят
+    const rows = document.querySelectorAll(".custom-table1 table tr");
+    let currentColor = null; // Променлива за текущия цвят
 
     rows.forEach(function (row) {
-        var cells = row.querySelectorAll("td");
+        const cells = row.querySelectorAll("td");
 
         cells.forEach(function (cell, index) {
             // Пропускане на първите две клетки в реда
@@ -179,18 +148,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            // Проверка за текста в клетката
-            var cellText = cell.innerText.trim().toLowerCase();
-            // Проверка за начало на нова смяна
+            const cellText = cell.innerText.trim().toLowerCase();
             if (cellText === "първа смяна") {
                 currentColor = ('#D9F2FF');
             }
             if (cellText === "втора смяна") {
-                {#inShift = true;#}
                  currentColor = ('#6BABE5')
             }
             if (cellText === "нощна смяна") {
-                {#inShift = true;#}
                  currentColor = ('#D9F2FF')
             }
             if (cellText === "редовна смяна") {
@@ -200,54 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
             cell.style.backgroundColor = currentColor;
             cell.style.border = `1px solid ${currentColor}`
 
-            //правя цвета на рамките единтичен с цвета на клетките
-            {#cells.forEach(function (cell) {#}
-            {#        cell.style.border = `1px solid ${currentColor}`;#}
-            {#    })#}
         });
     });
 });
 </script>
-{#логика за скриване на редове ,и показване на записи през определено време#}
-{#<script>#}
-{#  document.addEventListener("DOMContentLoaded", function () {#}
-{#    var displayTime = 10000;#}
-{##}
-{#    // Изчакайте няколко милисекунди след зареждането на DOM#}
-{#    setTimeout(function () {#}
-{#      const table = document.getElementById("myTable");#}
-{#      const rows = document.querySelectorAll('tr')#}
-{#      var currentIndex = 0;#}
-{#      var rowsToShow = 20;#}
-{#      console.log('zzzz', table);#}
-{##}
-{##}
-{#      function hideAllRows() {#}
-{#        for (var i = 0; i < rows.length; i++) {#}
-{#          rows[i].classList.add("hidden");#}
-{#        }#}
-{#      }#}
-{##}
-{#      function showNextRows() {#}
-{#        hideAllRows();#}
-{#        for (var i = currentIndex; i < currentIndex + rowsToShow; i++) {#}
-{#          if (i < rows.length) {#}
-{#            rows[i].classList.remove("hidden");#}
-{#          }#}
-{#        }#}
-{#        currentIndex += rowsToShow;#}
-{#        if (currentIndex >= rows.length) {#}
-{#          currentIndex = 0;#}
-{#        }#}
-{#      }#}
-{##}
-{#      hideAllRows();#}
-{#      showNextRows();#}
-{##}
-{#      setInterval(function () {#}
-{#        showNextRows();#}
-{#      }, displayTime);#}
-{#    }, 100);#}
-{#  });#}
-{##}
-{#</script>#}
