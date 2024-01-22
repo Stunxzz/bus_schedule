@@ -1,0 +1,253 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="{% static 'css/sb-admin-2.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap-table.css' %}" rel="stylesheet">
+
+    <script src="{% static 'js/jquery3.1.1.js' %}"></script>
+    <script src="{% static 'js/bootstrap-table.js' %}"></script>
+    <style>
+        .custom-container {
+            max-width: 100vw;
+            max-height: 100vh;
+
+        }
+
+        .custom-table1 {
+            {#border-collapse: collapse;#}
+            width: 100%;
+            height: 100%;
+
+        }
+
+
+        .custom-table1 table {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            font-weight: bold;
+            text-align: center;
+
+        }
+
+
+        .custom-table1 table tr {
+            text-align: center;
+            padding: 0;
+            color: black;
+
+        }
+
+        .custom-table1 table th{
+            text-align: center;
+            padding: 0;
+
+        }
+
+        .custom-table1 tr:nth-child(even) {
+            background-color: #D9F2FF;
+        }
+
+        .custom-table1 tr:nth-child(odd) {
+            background-color: #6BABE5;
+        }
+
+        .custom-table1 td {
+            {#font-size: 15.1px;#}
+            font-size: 1vw;
+        }
+        .custom-table1 th {
+            {#font-size: 16px;#}
+            font-size: 0.9vw;
+
+        }
+        {# @media (min-width: 1602px) {#}
+        {#    .custom-table1 th,#}
+        {#    .custom-table1 td {#}
+        {#        font-size: 19.2px;#}
+        {#    }#}
+
+
+
+        {#@media (min-width: 1602px) and (min-resolution: 96dpi) and (min-width: 2560px),#}
+        {#(min-width: 1602px) and (min-resolution: 192dpi) and (min-width: 5120px) {#}
+        {#    .custom-table1 th,#}
+        {#    .custom-table1 td {#}
+        {#        font-size: 19.5px;#}
+        {#    }#}
+
+
+        .custom-table1 tr:nth-child(even) th,
+        .custom-table1 tr:nth-child(even) td {
+            border: 1px solid #D9F2FF ;
+        }
+
+        .custom-table1 tr:nth-child(odd) th,
+        .custom-table1 tr:nth-child(odd) td {
+            border: 1px solid #6BABE5 ;
+        }
+
+
+        .custom-table1 tr:first-child th,
+        .custom-table1 tr:first-child td {
+            border: 1px solid #2a2e72;
+        }
+
+
+
+
+
+        .custom-table1 table tr:first-child {
+            background-color: #2a2e72;
+            color: white;
+        }
+        .hidden {
+        display: none;
+        }
+    </style>
+    <title>Witte</title>
+</head>
+<body>
+
+
+<div class="custom-container table-responsive">
+    <div class="custom-table1">
+        <table class="table table-responsive" id="myTable">
+            {{ table_html|safe }}
+        </table>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</body>
+<script>
+
+    setTimeout(function () {
+        location.reload();
+    }, 1000 * 60 * 30);
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var rows = document.querySelectorAll(".custom-table1 table tr");
+
+    rows.forEach(function (row) {
+        var cells = row.querySelectorAll("td");
+
+        cells.forEach(function (cell, index) {
+            // Пропускане на първите две клетки в реда
+            if (index < 1) {
+                return;
+            }
+
+            // Ако текстът на клетката е празен, задайте цвета
+            if (cell.innerText.trim() === "") {
+                cell.style.backgroundColor = "#EB002B";
+            }
+        });
+    });
+});
+
+$(document).ready(function () {
+    $(".custom-table1 table td").each(function () {
+        var cellText = $(this).text().trim();
+        var weekdays = ["понеделник", "вторник", "сряда", "четвъртък", "петък", 'събота', 'неделя', 'смяна', 'линия'];
+
+        // Проверка дали текущият текст е в списъка с дни
+        if (weekdays.includes(cellText.toLowerCase())) {
+            // Промяна на текста на главни букви
+            $(this).text(cellText.toUpperCase());
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    var rows = document.querySelectorAll(".custom-table1 table tr");
+    var currentColor = null; // Променлива за текущия цвят
+
+    rows.forEach(function (row) {
+        var cells = row.querySelectorAll("td");
+
+        cells.forEach(function (cell, index) {
+            // Пропускане на първите две клетки в реда
+            if (index > 0) {
+                return;
+            }
+
+            // Проверка за текста в клетката
+            var cellText = cell.innerText.trim().toLowerCase();
+            // Проверка за начало на нова смяна
+            if (cellText === "първа смяна") {
+                currentColor = ('#D9F2FF');
+            }
+            if (cellText === "втора смяна") {
+                {#inShift = true;#}
+                 currentColor = ('#6BABE5')
+            }
+            if (cellText === "нощна смяна") {
+                {#inShift = true;#}
+                 currentColor = ('#D9F2FF')
+            }
+            if (cellText === "редовна смяна") {
+                 currentColor = ('#6BABE5')
+            }
+            // Установяване на цвета на текущия ред и рамката
+            cell.style.backgroundColor = currentColor;
+            cell.style.border = `1px solid ${currentColor}`
+
+            //правя цвета на рамките единтичен с цвета на клетките
+            {#cells.forEach(function (cell) {#}
+            {#        cell.style.border = `1px solid ${currentColor}`;#}
+            {#    })#}
+        });
+    });
+});
+</script>
+{#логика за скриване на редове ,и показване на записи през определено време#}
+{#<script>#}
+{#  document.addEventListener("DOMContentLoaded", function () {#}
+{#    var displayTime = 10000;#}
+{##}
+{#    // Изчакайте няколко милисекунди след зареждането на DOM#}
+{#    setTimeout(function () {#}
+{#      const table = document.getElementById("myTable");#}
+{#      const rows = document.querySelectorAll('tr')#}
+{#      var currentIndex = 0;#}
+{#      var rowsToShow = 20;#}
+{#      console.log('zzzz', table);#}
+{##}
+{##}
+{#      function hideAllRows() {#}
+{#        for (var i = 0; i < rows.length; i++) {#}
+{#          rows[i].classList.add("hidden");#}
+{#        }#}
+{#      }#}
+{##}
+{#      function showNextRows() {#}
+{#        hideAllRows();#}
+{#        for (var i = currentIndex; i < currentIndex + rowsToShow; i++) {#}
+{#          if (i < rows.length) {#}
+{#            rows[i].classList.remove("hidden");#}
+{#          }#}
+{#        }#}
+{#        currentIndex += rowsToShow;#}
+{#        if (currentIndex >= rows.length) {#}
+{#          currentIndex = 0;#}
+{#        }#}
+{#      }#}
+{##}
+{#      hideAllRows();#}
+{#      showNextRows();#}
+{##}
+{#      setInterval(function () {#}
+{#        showNextRows();#}
+{#      }, displayTime);#}
+{#    }, 100);#}
+{#  });#}
+{##}
+{#</script>#}
