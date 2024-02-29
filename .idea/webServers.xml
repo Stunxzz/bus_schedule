@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="1035a754-fefb-465b-833a-3dd6984d3aa3" name="10.57.1.48">
+        <fileTransfer rootFolder="/var/www/py/bus_schedule" accessType="SFTP" host="10.57.1.48" port="22" sshConfigId="a15b6a76-02b8-4491-8fa4-dfcfd338f270" sshConfig="root@10.57.1.48:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

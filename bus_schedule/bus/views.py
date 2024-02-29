@@ -19,6 +19,7 @@ class ScheduleCreateView(mixins.LoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.save()
+        print('ffffffffff')
 
         return super().form_valid(form)
 
@@ -27,7 +28,7 @@ class ScheduleCreateView(mixins.LoginRequiredMixin, generic.CreateView):
 def schedule_show_view(request):
     try:
         schedule_model = ScheduleModel.objects.last()
-        print(schedule_model)
+        print('yeaaaa')
         if schedule_model:
             header = ""
             excel_path = schedule_model.excel.path
@@ -39,8 +40,8 @@ def schedule_show_view(request):
 
             dp = dp.fillna("")
             dp.columns = dp.columns.astype(str)
-            for index, row in dp.iterrows():
-                print(f"row:-------{row}--------")
+            # for index, row in dp.iterrows():
+            #     print(f"row:-------{row}--------")
 
             for colum in dp.columns:
                 if all("Unnamed:" in column for column in dp.columns):
